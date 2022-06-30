@@ -24,4 +24,4 @@ Model = GTR: General time reversible (nucleotides)
 
 0%|___|100%
   [...]
-Time taken: 0.005338 seconds
+Time taken: 0.005338 second
