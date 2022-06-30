@@ -1,6 +1,6 @@
 import Data.List (intercalate)
 import GHC.Float (powerDouble)
-import System.Process (readProcess)
+import System.Process (readProcess, callCommand)
 
 closeToZero = take 100 $ map (\x -> 1 / powerDouble 10 x) [1.0 ..]
 
@@ -29,3 +29,4 @@ main = do
   appendFile "close_to_zero.csv" ctz_str
   appendFile "close_to_double_limit.csv" ctd_str
   appendFile "control_group.csv" gc
+  callCommand "rm temp.txt"
