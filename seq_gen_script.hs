@@ -11,9 +11,9 @@ turnToDouble x = read (filter (/= '\n') x) :: Double
 getRuntime val = do
   let str_val = show val
   let str = intercalate "," $ replicate 5 str_val
-  let runs = replicate 100 $ readProcess "./sgt.bash" (return str) [] >>= \x -> return $ turnToDouble x
+  let runs = replicate 1000 $ readProcess "./sgt.bash" (return str) [] >>= \x -> return $ turnToDouble x
   x <- sequence runs
-  let avg = sum x / 100
+  let avg = sum x / 1000
   return $ str_val ++ "," ++ show avg ++ "\n"
 
 main = do
