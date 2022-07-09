@@ -13,12 +13,12 @@ closeToDoubleLimit = [maxBound - 99 .. maxBound] :: [Int]
 
 turnToDouble x = read (filter (/= '\n') x) :: Double
 
-getRuntime val = do
+getRuntime dir val = do
   let str_val = show val
   let str = intercalate "," $ replicate 5 str_val
-  let runs = replicate 1000 $ readProcess "./sgt.bash" (return str) [] >>= \x -> return $ turnToDouble x
+  let runs = replicate 10 $ readProcess "./sgt.bash" [str,dir,str_val] [] >>= \x -> return $ turnToDouble x
   x <- sequence runs
-  let avg = sum x / 1000
+  let avg = sum x / 10
   return $ str_val ++ "," ++ show avg ++ "\n"
 
 main = do
@@ -26,9 +26,9 @@ main = do
   writeFile "control_group.csv" header
   writeFile "close_to_zero.csv" header
   writeFile "close_to_double_limit.csv" header
-  ctz <- mapM getRuntime closeToZero
-  ctd <- mapM getRuntime closeToDoubleLimit
-  gc <- getRuntime 0.5
+  ctz <- mapM (getRuntime "ctz") closeToZero
+  ctd <- mapM (getRuntime "ctd") closeToDoubleLimit
+  gc <- getRuntime "cg" 0.5
   let ctz_str = concat ctz
   let ctd_str = concat ctd
   appendFile "close_to_zero.csv" ctz_str
