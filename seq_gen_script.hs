@@ -24,15 +24,15 @@ getRuntime dir val = do
 main = do
   let header = "val,time\n"
   writeFile "control_group.csv" header
-  -- writeFile "close_to_zero.csv" header
-  -- writeFile "close_to_double_limit.csv" header
-  -- ctz <- mapM (getRuntime "ctz") closeToZero
-  -- ctd <- mapM (getRuntime "ctd") closeToDoubleLimit
+  writeFile "close_to_zero.csv" header
+  writeFile "close_to_double_limit.csv" header
+  ctz <- mapM (getRuntime "ctz") closeToZero
+  ctd <- mapM (getRuntime "ctd") closeToDoubleLimit
   gc <- mapM (getRuntime "cg") $ replicate 100 0.5
-  -- let ctz_str = concat ctz
-  -- let ctd_str = concat ctd
+  let ctz_str = concat ctz
+  let ctd_str = concat ctd
   let gc_str = concat gc
-  -- appendFile "close_to_zero.csv" ctz_str
-  -- appendFile "close_to_double_limit.csv" ctd_str
+  appendFile "close_to_zero.csv" ctz_str
+  appendFile "close_to_double_limit.csv" ctd_str
   appendFile "control_group.csv" gc_str
   callCommand "rm temp.txt"

@@ -14,5 +14,5 @@ print(f"Close to zero compared to control: {(ctz_avg/cg_avg)*100}%")
 print(f"Close to double compared to close to zero: {(ctd_avg/ctz_avg)*100}%")
 
 print(f"Close to Double Limit Stats:\n{ctd.describe()}\n")
-print(f"Close to Double Limit Stats:\n{ctz.describe()}\n")
-print(f"Close to Double Limit Stats:\n{cg.describe()}\n")
+print(f"Close to Zero Stats:\n{ctz.describe()}\n")
+print(f"Control Group Stats:\n{cg.describe()}\n")
